@@ -12,75 +12,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,700,900" type="text/css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap">
-        <style>
-        
-        html{ box-sizing: border-box; }
-        *,::after,::before{ box-sizing: inherit }
-        body { margin: 0; padding: 0; font-family: "Rubik"; background-color: #252525; color: #f0f0f0; }
-        .wrap { margin: 0 auto; padding: 20px; max-width: 320px; }
-        .flex { display: flex; } 
-        .cx { text-align: center; }
-        .lx { text-align: left; }
-        .rx { text-align: right; }
-        .fll { float: left; }
-        .flr { float: right; }
-        .clr { clear: both; height: 0; line-height: 0; margin: 0; padding: 0; }
-        .full { width: 100%; display: block; }
-        .split-10 { width: 10%; }
-        .split-16 { width: 16.6666667%; }
-        .split-20 { width: 20%; }
-        .split-25 { width: 25%; }
-        .split-30 { width: 30%; }
-        .split-32 { width: 32%; }
-        .split-33 { width: 33.3333333%; }
-        .split-40 { width: 40%; }
-        .split-50 { width: 50%; }
-        .split-60 { width: 60%; }
-        .split-68 { width: 68%; }
-        .split-70 { width: 70%; }
-        .split-75 { width: 75%; }
-        .split-80 { width: 80%; }
-        .split-90 { width: 90%; }
-        .desktop-only { display: block; }
-        .mobile-only { display: none; }
-
-        .button { margin: 0; padding: 12px 24px; text-shadow: 1px 1px 1px #252525; cursor: pointer; display: inline-block; background-color: #36e7f4; text-decoration: none; outline: none; border: 0; text-align: center; border-radius: 7px; color: #ffffff; font-size: 1.25em; font-weight: 300; border: 0; user-select: none; }
-        .button.margin-bottom { margin-bottom: 20px; }
-        .button.button-secondary { background-color: #3688f4; color: #ffffff; }
-        .button.button-general { background-color: #303030; color: #36e7f4; }
-        .button.button-full { display: block; }
-            
-        .heading { margin: 0 0 20px 0; padding: 20px; border-bottom: 1px solid #303030; text-align: center; }
-        .heading img.logo { margin: 20px auto; padding: 0; }
-        .heading h1 { margin: 0; padding: 0; font-size: 2em; line-height: 1em; font-family: "Rubik"; }
-        .heading p { margin: 0 0 20px 0; padding: 0; font-size: 1em; }
-            
-        .network { margin: 0 0 20px 0; padding: 0 20px 20px 20px; border-bottom: 1px solid #303030; }
-        .status { font-size: 1.25em; text-align: left; text-shadow: 1px 1px 1px #303030;  }
-        .status span { color: #36e7f4; }
-        .status span.notconnect { color: #feba1e; }
-        .net-selector { margin: 0; padding: 5px; font-size: 0.75em; }
-            
-        .access-box { margin: 0; padding: 2px 0; }
-
-        .copyright { margin: 10px 0 0 0; padding: 10px; font-size: 0.75em; color: #777; }
-        .copyright a { margin: 0; padding: 0; color: #777; text-decoration: none; }
-        .copyright a:hover { text-decoration: underline; color: #777; }
-            
-        .access-box , .access-seed , .access-newaddress { margin: 0; padding: 0; min-height: 320px; }
-        
-        .access-seed , .access-newaddress { display: none; }
-        .access-seed h3 { margin: 0; padding: 0; font-size: 1em; color: #fff; }
-            
-        .form-box { margin: 0 0 20px 0; padding: 10px; cursor: pointer; border: 0; border-bottom: 1px solid #777; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; }
-        .form-box input { display: block; width: 100%; margin: 0; padding: 0; color: #fff; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
-        .form-box select { display: block; width: 100%; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
-        .form-box textarea { display: block; width: 100%; resize: none; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; color: #f0f0f0; }
-        .form-box input , .form-box select , .form-box textarea { border: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; -ms-appearance: none;  }
-        
-        .form-box:focus-within { border-bottom: 1px solid #feba1e; }
-            
-        </style>
+        <link rel="stylesheet" href="css/style.css">
         
     </head>
     
@@ -113,26 +45,40 @@
             
             <div class="xonic-box access-seed">
                 
-                <h3>Seed Phrase</h3>
-                
-                <div class="form-box">
+                <div class="as-01">
+
+                    <h3>Secret Seed</h3>
+                    <div class="form-box">
+
+                        <input type="password" name="seed" id="input-seed" value="" autocomplete="" placeholder="">
+
+                    </div>
+                    <div class="button button-full margin-bottom" id="xonic-access-seed">Confirm</div>
                     
-                    <input type="password" name="seed" value="" autocomplete="" placeholder="">
+                </div>
+                <div class="as-02">
+                    
+                    <h3>Address</h3>
+                    <div class="label current-address"></div>
+                
+                    <h3>Balance</h3>
+                    <div class="label current-xrp-balance"><span>0</span> XRP</div>
                     
                 </div>
                 
-                <div class="button button-full margin-bottom" id="xonic-access-confirm">Confirm</div>
                 <div class="button button-full button-general" id="xonic-main">Back</div>
             
             </div>
             
             <div class="xonic-box access-newaddress">
-                
-                <h3>New Address</h3>
-                
-                <p>Do you want to generate a new address?</p>
-                
-                <div class="button button-full margin-bottom" id="xonic-newaddress-confirm">Generate</div>
+                                
+                <div class="na-01">
+                    
+                    <p>Do you want to generate a new address?</p>
+                    <div class="button button-full margin-bottom" id="xonic-newaddress-confirm">Generate</div>
+                    
+                </div>
+                <div class="na-02"></div>
                 <div class="button button-full button-general" id="xonic-main">Back</div>
             
             </div>
@@ -149,67 +95,6 @@
     </body>
     <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/xrpl@2.0.0/build/xrpl-latest-min.js"></script>
-    <script>
-        
-        $( document ).ready(function() {
-            
-            /* FUNCS */
-            
-            async function main() {
-                
-                client = new xrpl.Client("wss://s.altnet.rippletest.net/");
-                await client.connect();
-                
-                if( client.isConnected() ){
-                    
-                    $("#led-network").removeClass("notconnect");
-                    $(".net-selector").html("XRPL Testnet");
-                    
-                }else{
-                    
-                    $("#led-network").addClass("notconnect");
-                    $(".net-selector").html("Offline");
-                    
-                }
-
-             }
-
-             main();
-            
-        });
-        
-        /* EVENTS */
-        
-        $(document).on("click","#xonic-access",function(){
-            
-            $(".access-box").fadeOut(333,function(){
-                
-                $(".access-seed").fadeIn(); 
-                
-            });
-            
-        });
-        
-        $(document).on("click","#xonic-newaddress",function(){
-            
-            $(".access-box").fadeOut(333,function(){
-                
-                $(".access-newaddress").fadeIn(); 
-                
-            });
-            
-        });
-        
-        $(document).on("click","#xonic-main",function(){
-            
-            $(".xonic-box").hide(1,function(){
-                
-                $(".access-box").fadeIn(333); 
-                
-            });
-            
-        });
-    
-    </script>
+    <script src="js/main.js"></script>
     
 </html> 

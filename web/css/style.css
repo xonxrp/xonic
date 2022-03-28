@@ -1,0 +1,69 @@
+        
+        html{ box-sizing: border-box; }
+        *,::after,::before{ box-sizing: inherit }
+        body { margin: 0; padding: 0; font-family: "Rubik"; background-color: #252525; color: #f0f0f0; }
+        .wrap { margin: 0 auto; padding: 20px; max-width: 320px; }
+        .flex { display: flex; } 
+        .cx { text-align: center; }
+        .lx { text-align: left; }
+        .rx { text-align: right; }
+        .fll { float: left; }
+        .flr { float: right; }
+        .clr { clear: both; height: 0; line-height: 0; margin: 0; padding: 0; }
+        .full { width: 100%; display: block; }
+        .split-10 { width: 10%; }
+        .split-16 { width: 16.6666667%; }
+        .split-20 { width: 20%; }
+        .split-25 { width: 25%; }
+        .split-30 { width: 30%; }
+        .split-32 { width: 32%; }
+        .split-33 { width: 33.3333333%; }
+        .split-40 { width: 40%; }
+        .split-50 { width: 50%; }
+        .split-60 { width: 60%; }
+        .split-68 { width: 68%; }
+        .split-70 { width: 70%; }
+        .split-75 { width: 75%; }
+        .split-80 { width: 80%; }
+        .split-90 { width: 90%; }
+        .desktop-only { display: block; }
+        .mobile-only { display: none; }
+
+        .button { margin: 0; padding: 12px 24px; text-shadow: 1px 1px 1px #252525; cursor: pointer; display: inline-block; background-color: #36e7f4; text-decoration: none; outline: none; border: 0; text-align: center; border-radius: 7px; color: #ffffff; font-size: 1.25em; font-weight: 300; border: 0; user-select: none; }
+        .button.margin-bottom { margin-bottom: 20px; }
+        .button.button-secondary { background-color: #3688f4; color: #ffffff; }
+        .button.button-general { background-color: #303030; color: #36e7f4; }
+        .button.button-full { display: block; }
+            
+        .heading { margin: 0 0 20px 0; padding: 20px; border-bottom: 1px solid #303030; text-align: center; }
+        .heading img.logo { margin: 20px auto; padding: 0; }
+        .heading h1 { margin: 0; padding: 0; font-size: 2em; line-height: 1em; font-family: "Rubik"; }
+        .heading p { margin: 0 0 20px 0; padding: 0; font-size: 1em; }
+            
+        .network { margin: 0 0 20px 0; padding: 0 20px 20px 20px; border-bottom: 1px solid #303030; }
+        .status { font-size: 1.25em; text-align: left; text-shadow: 1px 1px 1px #303030;  }
+        .status span { color: #36e7f4; }
+        .status span.notconnect { color: #feba1e; }
+        .net-selector { margin: 0; padding: 5px; font-size: 0.75em; }
+            
+        .access-box { margin: 0; padding: 2px 0; }
+
+        .copyright { margin: 10px 0 0 0; padding: 10px; font-size: 0.75em; color: #777; }
+        .copyright a { margin: 0; padding: 0; color: #777; text-decoration: none; }
+        .copyright a:hover { text-decoration: underline; color: #777; }
+            
+        .access-box , .access-seed , .access-newaddress { margin: 0; padding: 0; min-height: 320px; }
+        
+        .access-seed , .access-newaddress { display: none; }
+        .access-seed h3 { margin: 0; padding: 0; font-size: 1em; color: #777; }
+            
+        .form-box { margin: 0 0 20px 0; padding: 10px; cursor: pointer; border: 0; border-bottom: 1px solid #777; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; }
+        .form-box input { display: block; width: 100%; margin: 0; padding: 0; color: #fff; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
+        .form-box select { display: block; width: 100%; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
+        .form-box textarea { display: block; width: 100%; resize: none; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; color: #f0f0f0; }
+        .form-box input , .form-box select , .form-box textarea { border: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; -ms-appearance: none;  }
+        
+        .form-box:focus-within { border-bottom: 1px solid #feba1e; }
+            
+        .na-02 , .as-02 { display: none; }
+        .label { margin: 0; padding: 10px 0; font-size: 0.80em; }
