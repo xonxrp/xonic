@@ -43,15 +43,11 @@
         .split-90 { width: 90%; }
         .desktop-only { display: block; }
         .mobile-only { display: none; }
-  
-        .box { margin: 0 0 30px 0; padding: 30px; min-height: 300px; border-radius: 30px; background-color: #d8d8d8; }
-        .box.box-white { background-color: #ffffff; }
-        .box h2 { margin: 0 0 30px 0; padding: 0; font-size: 2em; font-weight: 600; }
-        .box p { margin: 0 0 30px 0; padding: 0; font-size: 1.50em; font-weight: 200; }
 
         .button { margin: 0; padding: 12px 24px; text-shadow: 1px 1px 1px #252525; cursor: pointer; display: inline-block; background-color: #36e7f4; text-decoration: none; outline: none; border: 0; text-align: center; border-radius: 7px; color: #ffffff; font-size: 1.25em; font-weight: 300; border: 0; user-select: none; }
         .button.margin-bottom { margin-bottom: 20px; }
         .button.button-secondary { background-color: #3688f4; color: #ffffff; }
+        .button.button-general { background-color: #303030; color: #36e7f4; }
         .button.button-full { display: block; }
             
         .heading { margin: 0 0 20px 0; padding: 20px; border-bottom: 1px solid #303030; text-align: center; }
@@ -70,6 +66,19 @@
         .copyright { margin: 10px 0 0 0; padding: 10px; font-size: 0.75em; color: #777; }
         .copyright a { margin: 0; padding: 0; color: #777; text-decoration: none; }
         .copyright a:hover { text-decoration: underline; color: #777; }
+            
+        .access-box , .access-seed , .access-newaddress { margin: 0; padding: 0; min-height: 320px; }
+        
+        .access-seed , .access-newaddress { display: none; }
+        .access-seed h3 { margin: 0; padding: 0; font-size: 1em; color: #fff; }
+            
+        .form-box { margin: 0 0 20px 0; padding: 10px; cursor: pointer; border: 0; border-bottom: 1px solid #777; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; }
+        .form-box input { display: block; width: 100%; margin: 0; padding: 0; color: #fff; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
+        .form-box select { display: block; width: 100%; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
+        .form-box textarea { display: block; width: 100%; resize: none; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; color: #f0f0f0; }
+        .form-box input , .form-box select , .form-box textarea { border: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; -ms-appearance: none;  }
+        
+        .form-box:focus-within { border-bottom: 1px solid #feba1e; }
             
         </style>
         
@@ -95,10 +104,36 @@
                 <div class="clr"></div>
             </div>
             
-            <div class="access-box">
+            <div class="xonic-box access-box">
                 
-                <div class="button button-full margin-bottom">Access</div>
-                <div class="button button-full button-secondary">Create Wallet</div>
+                <div class="button button-full margin-bottom" id="xonic-access">Access</div>
+                <div class="button button-full button-secondary" id="xonic-newaddress">New Address</div>
+            
+            </div>
+            
+            <div class="xonic-box access-seed">
+                
+                <h3>Seed Phrase</h3>
+                
+                <div class="form-box">
+                    
+                    <input type="password" name="seed" value="" autocomplete="" placeholder="">
+                    
+                </div>
+                
+                <div class="button button-full margin-bottom" id="xonic-access-confirm">Confirm</div>
+                <div class="button button-full button-general" id="xonic-main">Back</div>
+            
+            </div>
+            
+            <div class="xonic-box access-newaddress">
+                
+                <h3>New Address</h3>
+                
+                <p>Do you want to generate a new address?</p>
+                
+                <div class="button button-full margin-bottom" id="xonic-newaddress-confirm">Generate</div>
+                <div class="button button-full button-general" id="xonic-main">Back</div>
             
             </div>
             
@@ -122,13 +157,13 @@
             
             async function main() {
                 
-                client = new xrpl.Client("wss://xrplcluster.com/");
+                client = new xrpl.Client("wss://s.altnet.rippletest.net/");
                 await client.connect();
                 
                 if( client.isConnected() ){
                     
                     $("#led-network").removeClass("notconnect");
-                    $(".net-selector").html("XRPL MainNet");
+                    $(".net-selector").html("XRPL Testnet");
                     
                 }else{
                     
@@ -140,6 +175,38 @@
              }
 
              main();
+            
+        });
+        
+        /* EVENTS */
+        
+        $(document).on("click","#xonic-access",function(){
+            
+            $(".access-box").fadeOut(333,function(){
+                
+                $(".access-seed").fadeIn(); 
+                
+            });
+            
+        });
+        
+        $(document).on("click","#xonic-newaddress",function(){
+            
+            $(".access-box").fadeOut(333,function(){
+                
+                $(".access-newaddress").fadeIn(); 
+                
+            });
+            
+        });
+        
+        $(document).on("click","#xonic-main",function(){
+            
+            $(".xonic-box").hide(1,function(){
+                
+                $(".access-box").fadeIn(333); 
+                
+            });
             
         });
     
