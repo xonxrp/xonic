@@ -1,5 +1,8 @@
         $( document ).ready(function() {
             
+            /* INIT */
+            $(".xonic-box").hide();
+            
             /* FUNCS */
             
             async function main() {
@@ -17,6 +20,23 @@
                     $("#led-network").addClass("notconnect");
                     $(".net-selector").html("Offline");
 
+                }
+                
+                if( sessionStorage.getItem("wallet") ) {
+                    
+                    $("#led-wallet").removeClass("notconnect");
+                    $(".access-box").hide();
+                    $(".wallet-recap").fadeIn(333,function(){
+
+                        $(".current-address").html( sessionStorage.getItem("wallet") );
+                        $(".current-xrp-balance span").html("0");
+
+                    });
+                    
+                }else{
+                    
+                    $(".access-box").fadeIn(333);
+                    
                 }
 
             }
@@ -37,18 +57,13 @@
                 var seed = $.trim( $("#input-seed").val() );
                 var wallet = await xrpl.Wallet.fromSeed( seed );
                 
-                /*
-                var wallet_balances = await client.request({
-                    command: "account_info",
-                    account: wallet.address,
-                    strict: true,
-                    ledger_index: "current",
-                    queue: true
-                });
-                
-                var wallet_balance = await client.getXrpBalance( wallet.address ); */
-                
-                $(".as-02").fadeIn(300,function(){
+                // success
+                $("#led-wallet").removeClass("notconnect");
+                $(".xonic-box").hide();
+                $(".wallet-recap").fadeIn(300,function(){
+                    
+                    sessionStorage.setItem("seed", seed );
+                    sessionStorage.setItem("wallet", wallet.address );
                     
                     $(".current-address").html( wallet.address );
                     $(".current-xrp-balance span").html("0");
@@ -68,7 +83,6 @@
                     $("#input-seed").val("");
                     $("#xonic-access-seed").prop("disabled",false);
                     $(".sa-01").show();
-                    $(".sa-02").hide().html("");
                     $(".access-seed").fadeIn(); 
 
                 });
@@ -106,7 +120,6 @@
 
                 e.stopPropagation;
                 $(this).prop("disabled",true);
-                $(".as-01").hide();
                 AccessSeed();
 
             });
@@ -115,6 +128,7 @@
 
                 e.stopPropagation;
                 $(this).prop("disabled",true);
+                
                 $(".na-02").fadeIn(300,function(){
                     
                     $(".na-01").hide();
@@ -122,6 +136,15 @@
 
                 });
 
+            });
+            
+            $(document).on("click","#btn-disconnect-wallet",function(e){
+                
+                sessionStorage.removeItem('seed');
+                sessionStorage.removeItem('wallet');
+                $("#led-wallet").addClass("notconnect");
+                $(".xonic-box").hide(1,function(){ $(".access-box").fadeIn(333); });
+                
             });
             
         });
