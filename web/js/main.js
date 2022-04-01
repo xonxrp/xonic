@@ -73,8 +73,16 @@
             async function AccessSeed(){
                 
                 var seed = $.trim( $("#input-seed").val() );
-                var wallet = await xrpl.Wallet.fromSeed( seed );
                 
+                try{ var wallet = await xrpl.Wallet.fromSeed( seed ); }
+                catch(error){ 
+                    
+                    console.log(error.message);
+                    alert(error.message);
+                    return 0;
+                
+                }
+
                 $("#led-wallet").removeClass("notconnect");
                 $(".xonic-box").hide();
                 $(".wallet-recap").fadeIn(300,async function(){
@@ -82,10 +90,21 @@
                     sessionStorage.setItem("seed", seed );
                     sessionStorage.setItem("wallet", wallet.address );
                     
-                    let response = await api.request({
-                        "command": "account_info",
-                        "account": sessionStorage.getItem("wallet")
-                    });
+                    try{
+                        
+                        var response = await api.request({
+                            "command": "account_info",
+                            "account": sessionStorage.getItem("wallet")
+                        })
+                        
+                    }
+                    catch(error){ 
+
+                        console.log(error.message);
+                        alert(error.message);
+                        return 0;
+
+                    }
                     
                     sessionStorage.setItem("balance", response.result.account_data.Balance );
 
