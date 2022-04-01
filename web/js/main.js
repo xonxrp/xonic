@@ -22,7 +22,7 @@
                         
                         $("#led-wallet").removeClass("notconnect");
                         $(".box-wallet-access").hide();
-                        $(".wallet-recap").fadeIn(333,async function(){
+                        $(".box-wallet-recap").fadeIn(333,async function(){
                                                         
                                 let response = await api.request({
                                     "command": "account_info",
@@ -50,12 +50,12 @@
             
             async function GenNewAdd(){
                 
-                $(".backto-main").hide();
-                $(".na-02").html('Generating...<BR>');
+                $(".btn-backto-main").hide();
+                $(".na-02").html('').append('Generating...<BR>');
 
                 let wallet = await xrpl.Wallet.generate();
                 
-                $(".na-02").html('Funding for Test Net...<BR>');
+                $(".na-02").append('Funding for Test Net...<BR>');
                 
                 let response = await api.fundWallet( wallet );
                 
@@ -66,26 +66,27 @@
                 $(".na-02").append('<h3>Public Key</h3><div class="form-box"><input type="text" name="new-ppkey" value="' + wallet.publicKey + '" placeholder="Public Key"></div>');
                 $(".na-02").append('<h3>Seed Phrase</h3><div class="form-box"><input type="text" name="new-seed" value="' + wallet.seed + '" placeholder="Secret Seed"></div>');
                 
-                $(".backto-main").show();
+                $(".btn-backto-main").show();
                 
             }
             
             async function AccessSeed(){
                 
                 var seed = $.trim( $("#input-seed").val() );
+                    if( seed.length < 6 ){ return false; }
                 
                 try{ var wallet = await xrpl.Wallet.fromSeed( seed ); }
                 catch(error){ 
                     
                     console.log(error.message);
                     alert(error.message);
-                    return 0;
+                    return false;
                 
                 }
 
                 $("#led-wallet").removeClass("notconnect");
                 $(".xonic-box").hide();
-                $(".wallet-recap").fadeIn(300,async function(){
+                $(".box-wallet-recap").fadeIn(300,async function(){
                     
                     sessionStorage.setItem("seed", seed );
                     sessionStorage.setItem("wallet", wallet.address );
@@ -102,7 +103,7 @@
 
                         console.log(error.message);
                         alert(error.message);
-                        return 0;
+                        return false;
 
                     }
                     
@@ -118,35 +119,33 @@
 
             /* EVENTS */
 
-            $(document).on("click","#xonic-access",function(){
+            $(document).on("click","#btn-access",function(){
 
                 $(".box-wallet-access").fadeOut(333,function(){
 
-                    $(".backto-main").show(); 
+                    $(".btn-backto-main").show(); 
                     $("#input-seed").val("");
-                    $("#xonic-access-seed").prop("disabled",false);
                     $(".sa-01").show();
-                    $(".access-seed").fadeIn(); 
+                    $(".box-access-seed").fadeIn(); 
 
                 });
 
             });
 
-            $(document).on("click","#xonic-newaddress",function(){
+            $(document).on("click","#btn-newaddress",function(){
 
                 $(".box-wallet-access").fadeOut(333,function(){
                     
-                    $(".backto-main").show(); 
-                    $("#xonic-newaddress-confirm").prop("disabled",false);
+                    $(".btn-backto-main").show(); 
                     $(".na-01").show();
                     $(".na-02").hide().html("");
-                    $(".access-newaddress").fadeIn(); 
+                    $(".box-access-newaddress").fadeIn(); 
 
                 });
 
             });
 
-            $(document).on("click",".backto-main",function(){
+            $(document).on("click",".btn-backto-main",function(){
 
                 $(".xonic-box").hide(1,function(){
 
@@ -160,18 +159,16 @@
 
             });
             
-            $(document).on("click","#xonic-access-seed",function(e){
+            $(document).on("click","#btn-access-seed",function(e){
 
                 e.stopPropagation;
-                $(this).prop("disabled",true);
                 AccessSeed();
 
             });
 
-            $(document).on("click","#xonic-newaddress-confirm",function(e){
+            $(document).on("click","#btn-newaddress-confirm",function(e){
 
                 e.stopPropagation;
-                $(this).prop("disabled",true);
                 
                 $(".na-02").fadeIn(300,function(){
                     
