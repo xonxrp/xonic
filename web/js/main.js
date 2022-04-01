@@ -9,6 +9,10 @@
                 api = new xrpl.Client('wss://s.altnet.rippletest.net');
                 await api.connect();
                 
+                api.on('error', (errorCode, errorMessage) => {
+                    console.log(errorCode + ': ' + errorMessage);
+                });
+                
                 if( api.isConnected() ){
 
                     $("#led-network").removeClass("notconnect");
