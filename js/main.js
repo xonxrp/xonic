@@ -22,6 +22,7 @@
                         
                         $("#led-wallet").removeClass("notconnect");
                         $(".box-wallet-access").hide();
+                        $("#view-04,#view-05").show();
                         $(".box-wallet-recap").fadeIn(333,async function(){
                                                         
                                 let response = await api.request({
@@ -36,6 +37,7 @@
                         
                     }else{
                         
+                        $("#view-01").show();
                         $(".box-wallet-access").fadeIn(300);
                         
                     }
@@ -50,21 +52,21 @@
             
             async function GenNewAdd(){
                 
-                $(".btn-backto-main").hide();
-                $(".na-02").html('').append('Generating...<BR>');
+                $("#view-09").html('<div class="view-dialog cx"></div>')
+                $("#view-09 .view-dialog").append('Generating...<BR>');
 
                 let wallet = await xrpl.Wallet.generate();
                 
-                $(".na-02").append('Funding for Test Net...<BR>');
+                $("#view-09 .view-dialog").append('Funding for Test Net...<BR>');
                 
                 let response = await api.fundWallet( wallet );
                 
-                $(".na-02").html('');
+                $("#view-09").html('<div class="view-dialog cx"></div>');
                 
-                $(".na-02").append('<h3>Address</h3><div class="form-box"><input type="text" name="new-address" value="' + wallet.address + '" placeholder="Wallet Address"></div>');
-                $(".na-02").append('<h3>Private Key</h3><div class="form-box"><input type="text" name="new-pvkey" value="' + wallet.privateKey + '" placeholder="Private Key"></div>');
-                $(".na-02").append('<h3>Public Key</h3><div class="form-box"><input type="text" name="new-ppkey" value="' + wallet.publicKey + '" placeholder="Public Key"></div>');
-                $(".na-02").append('<h3>Seed Phrase</h3><div class="form-box"><input type="text" name="new-seed" value="' + wallet.seed + '" placeholder="Secret Seed"></div>');
+                $("#view-09 .view-dialog").append('<h3>Address</h3><div class="form-box"><input type="text" name="new-address" value="' + wallet.address + '" placeholder="Wallet Address"></div>');
+                $("#view-09 .view-dialog").append('<h3>Private Key</h3><div class="form-box"><input type="text" name="new-pvkey" value="' + wallet.privateKey + '" placeholder="Private Key"></div>');
+                $("#view-09 .view-dialog").append('<h3>Public Key</h3><div class="form-box"><input type="text" name="new-ppkey" value="' + wallet.publicKey + '" placeholder="Public Key"></div>');
+                $("#view-09 .view-dialog").append('<h3>Secret Seed</h3><div class="form-box"><input type="text" name="new-seed" value="' + wallet.seed + '" placeholder="Secret Seed"></div>');
                 
                 $(".btn-backto-main").show();
                 
@@ -108,12 +110,36 @@
                     }
                     
                     sessionStorage.setItem("balance", response.result.account_data.Balance );
-
+                        
                     $(".current-address").html( response.result.account_data.Account );
                     $(".current-xrp-balance span").html( xrpl.dropsToXrp( response.result.account_data.Balance ) );
-
+                    $("#view-04").show(0,function(){ $("#view-05,#btn-disconnect-wallet").fadeIn(300); });
                     
                 });
+                
+            }
+            
+            async function SendXRP(){
+                
+                let amount_xrp = $("#payment-qt").val();
+                let destination_add = $("#to-address").val();
+
+                const prepared = await client.autofill({
+                    "TransactionType": "Payment",
+                    "Account": wallet.address,
+                    "Amount": xrpl.xrpToDrops(amount_xrp),
+                    "Destination": destination_add
+                });
+                
+                const max_ledger = prepared.LastLedgerSequence;
+                console.log("Prepared transaction instructions:", prepared);
+                console.log("Transaction cost:", xrpl.dropsToXrp(prepared.Fee), "XRP");
+                console.log("Transaction expires after ledger:", max_ledger);
+
+                const signed = wallet.sign(prepared);
+                console.log("Identifying hash:", signed.hash);
+                console.log("Signed blob:", signed.tx_blob);
+
                 
             }
 
@@ -125,7 +151,7 @@
 
                     $(".btn-backto-main").show(); 
                     $("#input-seed").val("");
-                    $(".sa-01").show();
+                    $("#view-02").show();
                     $(".box-access-seed").fadeIn(); 
 
                 });
@@ -137,8 +163,8 @@
                 $(".box-wallet-access").fadeOut(333,function(){
                     
                     $(".btn-backto-main").show(); 
-                    $(".na-01").show();
-                    $(".na-02").hide().html("");
+                    $("#view-03").show();
+                    $("#view-09").hide().html("");
                     $(".box-access-newaddress").fadeIn(); 
 
                 });
@@ -151,8 +177,8 @@
 
                     $(".current-address").html("");
                     $(".current-xrp-balance span").html("");
-                    $(".as-01").show();
-                    $(".as-02").hide();
+                    $(".inner-view").hide();
+                    $("#view-01").show();
                     $(".box-wallet-access").fadeIn(333);
 
                 });
@@ -162,6 +188,7 @@
             $(document).on("click","#btn-access-seed",function(e){
 
                 e.stopPropagation;
+                $("#btn-disconnect-wallet").hide();
                 AccessSeed();
 
             });
@@ -170,9 +197,9 @@
 
                 e.stopPropagation;
                 
-                $(".na-02").fadeIn(300,function(){
+                $(".inner-view,.btn-backto-main").hide();
+                $("#view-09").fadeIn(300,function(){
                     
-                    $(".na-01").hide();
                     GenNewAdd();
 
                 });
@@ -184,32 +211,59 @@
                 sessionStorage.removeItem('seed');
                 sessionStorage.removeItem('wallet');
                 $("#led-wallet").addClass("notconnect");
-                $(".xonic-box").hide(0,function(){ $(".box-wallet-access").fadeIn(333); });
+                $(".xonic-box").hide(0,function(){ $("#view-01").show(); $(".box-wallet-access").fadeIn(333); });
                 
             });
             
-            $(document).on("click","#send-tx",function(e){
+            $(document).on("click","#give-tx",function(e){
                 
-                $(".wr-03").hide(0,function(){ $(".wr-04").show(); });
+                $("#payment-qt").val("");
+                $("#to-address").val("");
+                $("#view-04,#view-05").hide(0,function(){ $("#view-06").show(); });
                 
             });
             
             $(document).on("click","#take-tx",function(e){
                 
-                $(".wr-03").hide(0,function(){ $("#qrcode").html(""); $("#qrcode").qrcode( sessionStorage.getItem("wallet") ); $(".wr-05").show(); });
+                $("#view-04,#view-05").hide(0,function(){ $("#qrcode").html(""); 
+                $("#qrcode").qrcode( sessionStorage.getItem("wallet") );
+                $("#view-07").show(); });
                 
             });
             
             $(document).on("click",".cancel-tx",function(e){
                 
                 $(this).parent(".inner-view").hide();
-                $(".wr-03").show();
+                $("#view-04,#view-05").show();
+                
+            });
+            
+            $(document).on("click",".cancel-sign",function(e){
+                
+                $(this).parent(".inner-view").hide();
+                $("#view-04,#view-05").show();
                 
             });
             
             $(document).on("click","#confirm-tx",function(e){
                 
-                alert("not implemented yet");
+                let amount_xrp = $("#payment-qt").val();
+                let destination_add = $("#to-address").val();
+                
+                if( amount_xrp.length == "" ){ $("#payment-qt").focus(); return false; }
+                if( destination_add.length == "" ){ $("#to-address").focus(); return false; }
+                
+                $(".tx-amount span").html( amount_xrp );
+                $(".ad-destination").html( destination_add );
+                
+                $(this).parent(".inner-view").hide();
+                $("#view-08").show();
+                
+            });
+            
+            $(document).on("click","#sign-tx",function(e){
+                
+                alert("not implemented");
                 
             });
             

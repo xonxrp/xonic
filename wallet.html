@@ -38,14 +38,18 @@
             
             <div class="xonic-box box-wallet-access">
                 
-                <div class="button button-full button-general margin-bottom" id="btn-access">Access</div>
-                <div class="button button-full button-general margin-bottom" id="btn-newaddress">New Address</div>
+                <div class="inner-view" id="view-01">
+                    
+                    <div class="button button-full button-general margin-bottom" id="btn-access">Access</div>
+                    <div class="button button-full button-general margin-bottom" id="btn-newaddress">New Address</div>
+                    
+                </div>
             
             </div>
             
             <div class="xonic-box box-access-seed">
                 
-                <div class="as-01">
+                <div class="inner-view" id="view-02">
 
                     <h3>Secret Seed</h3>
                     <div class="form-box">
@@ -63,20 +67,24 @@
             
             <div class="xonic-box box-access-newaddress">
                                 
-                <div class="na-01">
+                <div class="inner-view" id="view-03">
                     
-                    <p>Do you want to generate a new address?</p>
-                    <div class="button button-full margin-bottom" id="btn-newaddress-confirm">Generate</div>
+                    <div class="view-dialog cx">
+                    
+                        <p>Do you want to create a new wallet address?</p>
+                    
+                    </div>
+                    <div class="button button-full margin-bottom" id="btn-newaddress-confirm">Yes</div>
                     
                 </div>
-                <div class="na-02"></div>
+                <div class="inner-view" id="view-09"></div>
                 <div class="button button-full button-general btn-backto-main">Back</div>
             
             </div>
             
             <div class="xonic-box box-wallet-recap">
                                 
-                <div class="inner-view wr-02">
+                <div class="inner-view boxed-view" id="view-04">
                     
                     <h3>Address</h3>
                     <div class="label current-address">&nbsp;</div>
@@ -86,31 +94,51 @@
                     
                 </div>
 
-                <div class="inner-view wr-03">
-
-                    <div class="fll split-50">
-                        <div class="button button-full button-general" id="send-tx">Send &#x21a5;</div>
+                <div class="inner-view" id="view-05">
+                    
+                    <div class="btn-group">
+                        <div class="fll split-50">
+                            <div class="button button-full button-general" id="give-tx">Give &#x21a5;</div>
+                        </div>
+                        <div class="fll split-50">
+                            <div class="button button-full button-general" id="take-tx">Take &#x21a7;</div>
+                        </div>
+                        <div class="clr"></div>
                     </div>
-                    <div class="fll split-50">
-                        <div class="button button-full button-general" id="take-tx">Take &#x21a7;</div>
-                    </div>
-                    <div class="clr"></div>
 
                 </div>
                 
-                <div class="inner-view wr-04">
+                <div class="inner-view" id="view-06">
                     
                     <h3>Send To</h3>
-                    <div class="form-box"><input type="text" name="to-address" value="" placeholder="Address"></div>
+                    <div class="form-box"><input type="text" id="to-address" name="to-address" value="" placeholder="Address"></div>
+                    <h3>XRP Amount</h3>
+                    <div class="form-box"><input type="number" id="payment-qt" name="payment-qt" step="0.000000000000001" min="0.000000000000001" value="" placeholder="0.000000"></div>
+                    
                     <div class="button button-full button-primary margin-bottom" id="confirm-tx">Confirm</div>
                     <div class="button button-full button-general margin-bottom cancel-tx">Cancel</div>
                 
                 </div>
                 
-                <div class="inner-view wr-05">
+                <div class="inner-view" id="view-07">
                     
                     <div id="qrcode"></div>
                     <div class="button button-full button-general margin-bottom cancel-tx">Cancel</div>
+                
+                </div>
+                
+                <div class="inner-view" id="view-08">
+                    
+                    <h3>Send</h3>
+                    <div class="label tx-amount"><span>&nbsp;</span> XRP</div>
+                
+                    <h3>To</h3>
+                    <div class="label ad-destination">&nbsp;</div>
+                    
+                    <br>
+                    
+                    <div class="button button-full button-primary margin-bottom" id="sign-tx">Sign</div>
+                    <div class="button button-full button-general margin-bottom cancel-sign">Cancel</div>
                 
                 </div>
                 
