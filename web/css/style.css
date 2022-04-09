@@ -2,7 +2,7 @@
         html{ box-sizing: border-box; }
         *,::after,::before{ box-sizing: inherit }
         body { margin: 0; padding: 0; font-family: "Rubik"; background-color: #252525; color: #f0f0f0; }
-        .wrap { margin: 0 auto; padding: 20px; max-width: 320px; }
+        .wrap { margin: 0 auto; padding: 20px; max-width: 480px; }
         .flex { display: flex; } 
         .cx { text-align: center; }
         .lx { text-align: left; }
@@ -55,22 +55,21 @@
         .access-box , .access-seed , .access-newaddress { margin: 0; padding: 0; min-height: 320px; }
         
         .access-seed , .access-newaddress { display: none; }
-        .xonic-box h3 { margin: 0; padding: 0; font-size: 1em; color: #777; }
+        .xonic-box h3 { margin: 0; padding: 0; font-size: 1em; font-weight: 300; text-transform: uppercase; color: #777; }
             
         .form-box { margin: 0 0 20px 0; padding: 10px; cursor: pointer; border: 0; border-bottom: 1px solid #777; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; }
         .form-box input { display: block; width: 100%; margin: 0; padding: 0; color: #fff; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
         .form-box select { display: block; width: 100%; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
         .form-box textarea { display: block; width: 100%; resize: none; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; color: #f0f0f0; }
         .form-box input , .form-box select , .form-box textarea { border: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; -ms-appearance: none;  }
-        
         .form-box:focus-within { border-bottom: 1px solid #feba1e; }
+
+        .xonic-box , .inner-view { display: none; }
+        .boxed-view { margin: 0 0 10px 0; padding: 20px; border: 1px solid #303030; border-radius: 7px; }
+        .btn-group { margin: 0 -10px 10px -10px; padding: 0; }
+        .btn-group .fll { padding: 10px; }
+        .view-dialog { margin: 0 0 20px 0; padding: 20px; border: 1px solid #303030; border-radius: 7px; }
             
-        .access-box , .na-02 , .wallet-recap { display: none; }
         .label { margin: 0; padding: 10px 0; font-size: 0.80em; }
 
-        .wr-02 { margin: 0 0 20px 0; padding: 0; }
-        .wr-03 { margin: 0 -10px 10px -10px; padding: 0; }
-
-        .wr-03 .fll { margin: 0; padding: 10px; }
-
-        .xonic-box { display: none; }
+        #qrcode canvas { margin: 20px 0; padding: 0; width: 100%; display: block; border-radius: 7px; }
