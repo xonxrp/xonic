@@ -121,24 +121,67 @@
             
             async function SendXRP(){
                 
+                try{ var wallet_sending = await xrpl.Wallet.fromSeed( sessionStorage.getItem('seed') ); }
+                catch(error){ 
+                    
+                    console.log(error.message);
+                    alert(error.message);
+                    return false;
+                
+                }
+
                 let amount_xrp = $("#payment-qt").val();
                 let destination_add = $("#to-address").val();
-
-                const prepared = await client.autofill({
-                    "TransactionType": "Payment",
-                    "Account": wallet.address,
-                    "Amount": xrpl.xrpToDrops(amount_xrp),
-                    "Destination": destination_add
-                });
                 
-                const max_ledger = prepared.LastLedgerSequence;
-                console.log("Prepared transaction instructions:", prepared);
-                console.log("Transaction cost:", xrpl.dropsToXrp(prepared.Fee), "XRP");
-                console.log("Transaction expires after ledger:", max_ledger);
+                try{
+                    
+                    const prepared = await api.autofill({
+                        "TransactionType": "Payment",
+                        "Account": wallet_sending.address,
+                        "Amount": xrpl.xrpToDrops(amount_xrp),
+                        "Destination": destination_add
+                    });
+                    
+                    const max_ledger = prepared.LastLedgerSequence;
+                    console.log("Prepared transaction instructions:", prepared);
+                    console.log("Transaction cost:", xrpl.dropsToXrp(prepared.Fee), "XRP");
+                    console.log("Transaction expires after ledger:", max_ledger);
+                    const signed = await wallet_sending.sign(prepared);
 
-                const signed = wallet.sign(prepared);
-                console.log("Identifying hash:", signed.hash);
-                console.log("Signed blob:", signed.tx_blob);
+                    console.log("Identifying hash:", signed.hash);
+                    console.log("Signed blob:", signed.tx_blob);
+
+                    alert("Sent!");
+                    
+                }
+                catch(error){ 
+                    
+                    console.log(error.message);
+                    alert(error.message);
+                    return false;
+                
+                }
+
+                try{
+
+                    var response = await api.request({
+                        "command": "account_info",
+                        "account": sessionStorage.getItem("wallet")
+                    });
+                    
+                    sessionStorage.setItem("balance", response.result.account_data.Balance );
+                    $(".current-xrp-balance span").html( xrpl.dropsToXrp( sessionStorage.getItem("balance") ) );
+                    $(".xonic-box,.inner-view").hide();
+                    $(".box-wallet-recap,#view-04,#view-05").show();
+
+                }
+                catch(error){ 
+
+                    console.log(error.message);
+                    alert(error.message);
+                    return false;
+
+                }
 
                 
             }
@@ -263,7 +306,8 @@
             
             $(document).on("click","#sign-tx",function(e){
                 
-                alert("not implemented");
+                //alert("not implemented");
+                SendXRP();
                 
             });
             
