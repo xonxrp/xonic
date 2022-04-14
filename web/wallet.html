@@ -13,20 +13,27 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,700,900" type="text/css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap">
         <link rel="stylesheet" href="css/style.css">
-        
+        <link rel="stylesheet" href="css/icons.css">
+
     </head>
     
     <body>
         
         <div class="wrap">
             
-            <div class="heading">
+            <div class="heading heading-full">
                 
                 <img class="logo" src="images/xonic_icon_48.png" width="48" height="48" alt="XONIC">
                 <h1>XONIC</h1>
                 
             </div>
+            <div class="heading heading-slim cx">
+                
+                <i class="icon-xonic"></i>
+                
+            </div>
             <div class="network">
+                
                 <div class="fll split-50">
                     <div class="status"><span id="led-network" class="notconnect">&#9632;</span> <span id="led-wallet" class="notconnect">&#9632;</span></div>
                 </div>
@@ -34,6 +41,7 @@
                     <div class="net-selector rx">Connecting...</div>
                 </div>
                 <div class="clr"></div>
+                
             </div>
             
             <div class="xonic-box box-wallet-access">
@@ -43,6 +51,12 @@
                     <div class="button button-full button-general margin-bottom" id="btn-access">Access</div>
                     <div class="button button-full button-general margin-bottom" id="btn-newaddress">New Address</div>
                     
+                </div>
+                
+                <div class="copyright cx">
+
+                    &copy; 2022 <a href="https://xon.money/">XON</a>
+
                 </div>
             
             </div>
@@ -86,11 +100,15 @@
                                 
                 <div class="inner-view boxed-view" id="view-04">
                     
-                    <h3>Address</h3>
-                    <div class="label current-address">&nbsp;</div>
+                    <div class="box-line">
+                        <h3><i class="icon-wallet"></i> Address</h3>
+                        <div class="label current-address">&nbsp;</div>
+                    </div>
                 
-                    <h3>Balance</h3>
-                    <div class="label current-xrp-balance"><span>&nbsp;</span> XRP</div>
+                    <div class="box-line">
+                        <h3><i class="icon-xrp-xrp-logo"></i> Balance</h3>
+                        <div class="label current-xrp-balance"><span>&nbsp;</span> XRP</div>
+                    </div>
                     
                 </div>
 
@@ -98,10 +116,10 @@
                     
                     <div class="btn-group">
                         <div class="fll split-50">
-                            <div class="button button-full button-general" id="give-tx">Give &#x21a5;</div>
+                            <div class="button button-full button-general" id="give-tx">Send</div>
                         </div>
                         <div class="fll split-50">
-                            <div class="button button-full button-general" id="take-tx">Take &#x21a7;</div>
+                            <div class="button button-full button-general" id="take-tx">Receive</div>
                         </div>
                         <div class="clr"></div>
                     </div>
@@ -150,13 +168,7 @@
                 
             
             </div>
-            
-            <div class="copyright cx">
-                
-                &copy; 2022 <a href="https://xon.money/">XON</a>
-            
-            </div>
-            
+
         </div>
 
 
