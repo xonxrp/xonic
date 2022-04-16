@@ -66,9 +66,9 @@
         .xonic-box h3 { margin: 0; padding: 0; font-size: 1em; font-weight: 300; text-transform: uppercase; color: #777; }
             
         .form-box { margin: 0 0 20px 0; padding: 10px; cursor: pointer; border: 0; border-bottom: 1px solid #777; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; }
-        .form-box input { display: block; width: 100%; margin: 0; padding: 0; color: #fff; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
-        .form-box select { display: block; width: 100%; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; }
-        .form-box textarea { display: block; width: 100%; resize: none; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1.25em; font-family: 'Rubik'; color: #f0f0f0; }
+        .form-box input { display: block; width: 100%; margin: 0; padding: 0; color: #fff; border: 0; outline: none; background-color: transparent; font-size: 1em; font-family: 'Rubik'; }
+        .form-box select { display: block; width: 100%; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1em; font-family: 'Rubik'; }
+        .form-box textarea { display: block; width: 100%; resize: none; margin: 0; padding: 0; border: 0; outline: none; background-color: transparent; font-size: 1em; font-family: 'Rubik'; color: #f0f0f0; }
         .form-box input , .form-box select , .form-box textarea { border: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; -ms-appearance: none;  }
         .form-box:focus-within { border-bottom: 1px solid #feba1e; }
 
